@@ -1,5 +1,12 @@
-import 'package:backend_dart/backend_dart.dart' as backend_dart;
+import 'package:shelf/shelf.dart';
+import 'package:shelf/shelf_io.dart' as shelf_io;
 
-void main(List<String> arguments) {
-  print('Hello world: ${backend_dart.calculate()}!');
+import 'server_handler.dart';
+
+void main() async {
+  var _server = ServeHandler();
+
+  final server = await shelf_io.serve(_server.handler, 'localhost', 8080);
+
+  print('Server running at http://localhost:8080');
 }
